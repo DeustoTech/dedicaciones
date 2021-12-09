@@ -1,0 +1,18 @@
+.init {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	flex-direction: column;
+}
+
+img {
+	display: block;
+}
+
+/*TODO arreglar */
+html,
+body,
+#root {
+	height: 100%;
+}
