@@ -21,18 +21,19 @@ export class API {
 	constructor(baseURL: string) {
 		this.httpClient = axios.create({
 			baseURL: baseURL,
+			headers: {
+				pragma: 'no-cache',
+				'cache-control': 'no-cache',
+			},
 		})
-
+		//insertar token en Bearer header en cada request
 		this.httpClient.interceptors.request.use((request) => {
 			if (!request.headers) request.headers = {}
 			request.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
 			return request
 		})
 	}
-	static isNetworkError(err: AxiosError) {
-		const isNetworkError = !!err.isAxiosError && !err.response
-		return isNetworkError
-	}
+
 	async login(): Promise<{ error?: string; authUrl?: string }> {
 		try {
 			const response = await this.httpClient.get<
@@ -98,7 +99,7 @@ export class API {
 			return { error: error.message }
 		}
 	}
-	onUnauthorized(cb: () => void | Promise<void>) {
+	onUnauthorized(cb: () => void) {
 		this.httpClient.interceptors.response.use(
 			(response) => {
 				if (response.status === 410) {

@@ -1,14 +1,11 @@
 import { FC } from 'react'
 import LoginButton from './LoginButton'
 import './Init.css'
-import logo from '../../logo.jpg'
+import logo from './logo.jpg'
 import { useAPI } from '../../hooks/useAPI'
 
 const Init: FC = () => {
-	const { API /* setIsLoggedOut */ } = useAPI()
-	// useEffect(() => {
-	// 	console.log(isLoggedOut)
-	// }, [isLoggedOut])
+	const { API } = useAPI()
 
 	const onLogin = async () => {
 		const resp = await API.login()
@@ -24,7 +21,6 @@ const Init: FC = () => {
 		<div className='init'>
 			<LoginButton onClick={onLogin}></LoginButton>
 			<img src={logo} alt=''></img>
-			{/* {isLoggedOut && <h1>ha cerrado sesión correctamente</h1>} */}
 		</div>
 	)
 }

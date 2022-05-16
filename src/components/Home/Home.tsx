@@ -14,7 +14,7 @@ interface ParamsProps extends DefaultParams {
 const Home: FC<RouteComponentProps<ParamsProps>> = ({ params }) => {
 	const [location, setLocation] = useLocation()
 	const [user, setUser] = useState<User>()
-	const { API /* setIsLoggedOut */ } = useAPI()
+	const { API } = useAPI()
 
 	async function getUser() {
 		const resp = await API.getUser()
@@ -28,7 +28,7 @@ const Home: FC<RouteComponentProps<ParamsProps>> = ({ params }) => {
 	useEffect(() => {
 		if (!params.token) throw new Error('no given token')
 
-		localStorage.setItem('token', params.token) //TODO
+		localStorage.setItem('token', params.token)
 		toast.promise(getUser(), {
 			loading: 'Cargando...',
 			success: <b>Listo!</b>,
@@ -47,7 +47,6 @@ const Home: FC<RouteComponentProps<ParamsProps>> = ({ params }) => {
 		localStorage.removeItem('token')
 		setLocation('/')
 		toast.success('Se ha cerrado sesión correctamente')
-		// setIsLoggedOut(true)
 	}
 	if (!user) return <p>-</p>
 

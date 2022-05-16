@@ -9,7 +9,6 @@ import { API } from './api'
 import toast, { Toaster } from 'react-hot-toast'
 
 function App() {
-	// const [isLoggedOut, setIsLoggedOut] = useState(false)
 	const [location, setLocation] = useLocation()
 	const api = new API('http://localhost:3001/')
 
@@ -19,12 +18,13 @@ function App() {
 	})
 	return (
 		<ErrorBoundary>
-			<Toaster />
-			<APIContext.Provider
-				value={{ /*isLoggedOut, setIsLoggedOut,*/ API: api }}>
-				<Route component={Init} path='/' />
-				<Route component={Home} path='/home/:token' />
-			</APIContext.Provider>
+			<div>
+				<Toaster />
+				<APIContext.Provider value={{ API: api }}>
+					<Route component={Init} path='/' />
+					<Route component={Home} path='/home/:token' />
+				</APIContext.Provider>
+			</div>
 		</ErrorBoundary>
 	)
 }

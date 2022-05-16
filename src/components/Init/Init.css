@@ -4,13 +4,12 @@
 	align-items: center;
 	height: 100%;
 	flex-direction: column;
+	margin-top: 10%;
 }
 
 img {
 	display: block;
 }
-
-/*TODO arreglar */
 html,
 body,
 #root {
